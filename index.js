@@ -1,0 +1,1 @@
+ReactDOM.render(<p>My First React App</p>, document.getElementById("root"))
