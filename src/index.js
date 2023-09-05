@@ -1,15 +1,14 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
 import './index.css'
-import Header from './components/header.js'
-import Footer from './components/footer.js'
-import MainContent from "./components/maincontent"
+import Navbar from "./components/nav"
+import Hero from "./components/hero"
 
 function App (){
   return (
     <div className="content">
-      <Header />
-      <MainContent />
+      <Navbar />
+      <Hero />
     </div>
   )
 }

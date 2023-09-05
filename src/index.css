@@ -5,7 +5,7 @@ body {
   sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #282D35;
+  background-color: white;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -15,55 +15,32 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-.nav{
+nav {
+  height: 70px;
   display: flex;
-  align-items: center;
-  background-color: #21222A;
-  height: 90px;
-  padding: 20px;
+  padding: 20px 36px;
+  box-shadow: 0px 2.98256px 7.4564px rgba(0, 0, 0, 0.1);
 }
-.nav h3{
-  color: white;
 
+.nav--logo{
+  max-width: 100px;
 }
-.nav h1{
-  color: white;
-  margin-left: 5px;
-  margin-right: auto;
-}
-.nav img{
-  width: 60px;
-  
-}
-main{
-  flex: 1; 
-  padding: 57px 27px;
-  background-image: url(./components/reactjs-icon\ 2.png);
-  background-repeat: no-repeat;
-  background-position: right 75%;
-}
-main h1{
-  
-  font-size: 39px;
-  color: white;
-}
-main li{
-  color: white;padding-block: 7px;
-}
-main li::marker{
-  font-size: large;
-  color: #61DAFB;
-}
-#root{
-  min-height: 100vh;
-}
-footer{
-  display: flex;
-  align-items: center;
-  background-color: #21222A;
-  height: 90px;
+
+section{
   padding: 20px;
 }
-footer small{
-  color: #61DAFB;
+
+.hero{
+  display: flex;
+  flex-direction: column;
+}
+.hero--photo{
+  max-width: 400px;
+  align-self: center;
+}
+.hero--header{
+  margin-bottom: 16px;
+}
+.hero--text{
+  margin-top: 0;
 }
