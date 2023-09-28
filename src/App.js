@@ -2,8 +2,12 @@ import React from "react"
 import './App.css'
 import Dice from "./components/dice"
 import {nanoid} from "nanoid"
+import Confetti from "react-confetti"
 
 export default function App() {
+
+    const [tenzies, setTenzies] = React.useState(false)
+    const [dice, setDice] = React.useState(allNewDice())
 
     function generateNewDie() {
         return {
@@ -12,6 +16,15 @@ export default function App() {
             id: nanoid()
         }
     }
+
+    React.useEffect(()=>{
+        const allHeld = dice.every(die => die.isHeld)
+        const allSameValue = dice.every(die=>die.value === dice[0].value)
+        if(allHeld && allSameValue){
+            setTenzies(true)
+            console.log("You Won !")
+        }
+    },[dice])
 
     function allNewDice() {
         const min = 1;
@@ -29,18 +42,22 @@ export default function App() {
         return dices;
     }
 
-    const [dice, setDice] = React.useState(allNewDice())
+    
 
     const diceElements = dice.map(die => <Dice key={die.id} value={die.value} isHeld={die.isHeld} holdDice={()=> holdDice(die.id)}/>)
 
     function rollDice() {
-        setDice(oldDice => oldDice.map(die => {
-            return die.isHeld ? 
-                die :
-                generateNewDie()
-        }))
+        if(!tenzies) {
+            setDice(oldDice => oldDice.map(die => {
+                return die.isHeld ? 
+                    die :
+                    generateNewDie()
+            }))
+        } else {
+            setTenzies(false)
+            setDice(allNewDice())
+        }
     }
-    
     function holdDice(id) {
         setDice(oldDice => oldDice.map(die => {
             return die.id === id ? 
@@ -50,6 +67,7 @@ export default function App() {
     }
     return (
         <main>
+            {tenzies && <Confetti />}
             <h1 className="title">Tenzies</h1>
             <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
             <div className="dices">
@@ -57,7 +75,7 @@ export default function App() {
             </div>
             <button style={{
                 height: 50,
-                width: 100,
+                width: 170,
                 border: "none",
                 borderRadius: 6,
                 backgroundColor: "#5035FF",
@@ -65,7 +83,9 @@ export default function App() {
                 fontSize: "large",
                 margin : "20px",
                 boxShadow: "5px 5px 10px -3px rgba(0, 0, 0, 0.7)"
-            }} onClick={rollDice}>Roll</button>
+            }} onClick={rollDice}>
+                {!tenzies ? "Roll" : "New Game"}
+                </button>
         </main>
     )
 }
